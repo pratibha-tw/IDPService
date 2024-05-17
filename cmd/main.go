@@ -13,6 +13,6 @@ func main() {
 	configs.GetConfigs(&cfg)
 
 	router.RegisterRoutes(engine, cfg)
-	engine.Run("localhost:3000")
+	engine.Run(":3000")
 
 }

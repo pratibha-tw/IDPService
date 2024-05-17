@@ -1,30 +1,19 @@
-
-# Use the official Go image as a base image
+# Start from a Golang base image
 FROM golang:latest
 
-# Set the working directory inside the container
+# Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Copy the rest of the application source code
+# Copy the source code into the container
 COPY . .
 
-# Download and install Go dependencies
+# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
 
-# # Build the Go application
-# RUN CGO_ENABLED=0 GOOS=linux go build -o mytodoapp
+# Build the Go app
 RUN go build -o idpservice cmd/main.go
 
-# # Use a lightweight Alpine image as a final base image
-# FROM alpine:latest
-
-# # Set the working directory inside the container
-# WORKDIR /app
-
-# # Copy the built binary from the builder stage
-# COPY --from=builder /app/idpservice .
-
-# Expose the port the application listens on
+# Expose port 3000 to the outside world
 EXPOSE 3000
 
 # Command to run the executable
