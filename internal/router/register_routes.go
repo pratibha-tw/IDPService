@@ -7,11 +7,13 @@ import (
 	user_handler "idp/internal/handler/user_handler"
 	user_repo "idp/internal/repository/userrepository"
 	"idp/internal/service/userservice"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
 func RegisterRoutes(engine *gin.Engine, cfg configs.Config) {
+	time.Sleep(10 * time.Second)
 	dbConnect := database.CreateConnection(cfg)
 	redisConn := database.CreateRedisConnection(cfg)
 	database.RunMigration(dbConnect)
